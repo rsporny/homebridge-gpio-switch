@@ -1,20 +1,26 @@
 {
   "name": "homebridge-gpio-switch",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Homebridge plugin to control relay switch via Raspberry Pi GPIO pins",
   "license": "MIT",
   "keywords": [
-    "homebridge-plugin"
+    "homebridge-plugin",
+    "homebridge",
+    "raspberry",
+    "gpio",
+    "relay",
+    "switch",
+    "homekit"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rsporny/homebridge-gpio-switch"
   },
   "dependencies": {
-    "rpio": "^0.9.16"
+    "rpio": "^2.2.0"
   },
   "engines": {
-    "homebridge": ">=0.4.20",
+    "homebridge": ">=1.2.3",
     "node": ">=6.9.5"
   },
   "maintainers": [

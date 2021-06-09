@@ -19,7 +19,7 @@ function SwitchAccessory(log, config) {
   this.infoService
     .setCharacteristic(Characteristic.Manufacturer, "Radoslaw Sporny")
     .setCharacteristic(Characteristic.Model, "RaspberryPi GPIO Switch")
-    .setCharacteristic(Characteristic.SerialNumber, "Version 1.0.0");
+    .setCharacteristic(Characteristic.SerialNumber, "Version 1.1.0");
 
   // use gpio pin numbering
   rpio.init({
