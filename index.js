@@ -12,6 +12,7 @@ function SwitchAccessory(log, config) {
   this.log = log;
   this.name = config['name'];
   this.pin = config['pin'];
+  this.invert = config['invert'];
 
   this.service = new Service.Switch(this.name);
 
@@ -34,6 +35,7 @@ function SwitchAccessory(log, config) {
 
 SwitchAccessory.prototype.setPowerState = function(value, callback) {
   this.log("Setting switch to %s", value);
+  if (this.invert) value = !value;
   rpio.write(this.pin, (value ? rpio.LOW : rpio.HIGH));
   callback();
 }
