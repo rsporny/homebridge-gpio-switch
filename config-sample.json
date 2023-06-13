@@ -10,7 +10,8 @@
     {
       "accessory": "Switch",
       "name": "Bedside lamp",
-      "pin": 18
+      "pin": 18,
+      "invert": false
     }
   ]
 }
