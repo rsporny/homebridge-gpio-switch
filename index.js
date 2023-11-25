@@ -26,7 +26,7 @@ function SwitchAccessory(log, config) {
   rpio.init({
     mapping: 'gpio'
   });
-  rpio.open(this.pin, rpio.OUTPUT, rpio.HIGH);
+  rpio.open(this.pin, rpio.OUTPUT, this.invert ? rpio.LOW : rpio.HIGH);
 
   this.service
     .getCharacteristic(Characteristic.On)
