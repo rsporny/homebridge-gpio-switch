@@ -1,6 +1,6 @@
 {
   "name": "homebridge-gpio-switch",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Homebridge plugin to control relay switch via Raspberry Pi GPIO pins",
   "license": "MIT",
   "keywords": [
