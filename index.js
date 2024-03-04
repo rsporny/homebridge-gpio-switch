@@ -1,9 +1,12 @@
 var rpio = require("rpio");
-var Service, Characteristic;
+var Service, Characteristic, User;
+var storage = require("node-persist");
+const stateKey = "homebridge-gpio-switch.state";
 
 module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
+  User = homebridge.user;
 
   homebridge.registerAccessory("homebridge-gpio-switch", "Switch", SwitchAccessory);
 }
@@ -13,6 +16,9 @@ function SwitchAccessory(log, config) {
   this.name = config['name'];
   this.pin = config['pin'];
   this.invert = config['invert'];
+  this.storage = storage.create();
+  const cacheDir = User.persistPath();
+  this.storage.initSync({dir: cacheDir, forgiveParseErrors: true});
 
   this.service = new Service.Switch(this.name);
 
@@ -27,6 +33,10 @@ function SwitchAccessory(log, config) {
     mapping: 'gpio'
   });
   rpio.open(this.pin, rpio.OUTPUT, this.invert ? rpio.LOW : rpio.HIGH);
+  value = this.storage.getItemSync(stateKey);
+  this.log("Persisted state: " + value);
+  this.setPowerState(value, e => {});
+  this.service.getCharacteristic(Characteristic.On).updateValue(value);
 
   this.service
     .getCharacteristic(Characteristic.On)
@@ -37,10 +47,10 @@ SwitchAccessory.prototype.setPowerState = function(value, callback) {
   this.log("Setting switch to %s", value);
   if (this.invert) value = !value;
   rpio.write(this.pin, (value ? rpio.LOW : rpio.HIGH));
+  this.storage.setItemSync(stateKey, value);
   callback();
 }
 
 SwitchAccessory.prototype.getServices = function() {
   return [this.infoService, this.service];
 }
-
