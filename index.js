@@ -1,4 +1,3 @@
-cat index.js
 var rpio = require("rpio");
 var Service, Characteristic, User;
 var storage = require("node-persist");
