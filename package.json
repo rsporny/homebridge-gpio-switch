@@ -17,7 +17,8 @@
     "url": "https://github.com/rsporny/homebridge-gpio-switch"
   },
   "dependencies": {
-    "rpio": "^2.2.0"
+    "rpio": "^2.2.0",
+    "node-persist": "^2.1.0"
   },
   "engines": {
     "homebridge": ">=1.2.3",
